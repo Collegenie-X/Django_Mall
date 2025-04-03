@@ -2,9 +2,9 @@ from django.forms import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from .models import Problem, Wishlist, PreviewImage
+from ..models import Problem, Wishlist, PreviewImage
 from accounts.models import User
-from .serializers import ProblemSerializer
+from ..serializers import ProblemSerializer
 from django.shortcuts import get_object_or_404
 
 
@@ -32,7 +32,7 @@ from rest_framework.permissions import AllowAny
 
 
 from rest_framework.decorators import api_view, permission_classes
-from .serializers import UnitTypeSerializer, SectionTypeSerializer
+from ..serializers import UnitTypeSerializer, SectionTypeSerializer
 
 from decimal import Decimal
 from django.db.models import Prefetch
