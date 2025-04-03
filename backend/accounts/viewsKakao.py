@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+from django.utils import timezone
 import logging
 
 from django.contrib.auth import get_user_model
@@ -98,7 +99,10 @@ class KakaoSignInView(APIView):
         user, created = User.objects.get_or_create(email=email, defaults=defaults)
 
         # 필요에 따라 nickname 업데이트
-        user.username = nickname  # 닉네임에 맞게 업데이트
+        if (user.username != None) and (user.username != nickname):
+            user.username = nickname
+        user.last_login = timezone.now()
+        user.save()
         user.save()
 
         return user, created
