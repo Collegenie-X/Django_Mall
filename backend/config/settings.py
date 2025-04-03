@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "accounts",
     "rangefilter",
     "django_admin_logs",
+    "store",
 ]
 AUTH_USER_MODEL = "accounts.User"
 
@@ -185,13 +186,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+# MEDIA 설정
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = "static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+# STATIC 파일 설정
+STATIC_URL = "/static/"
+# (개발 시에는 아래처럼 static 폴더를 명시적으로 참조하는 것이 일반적)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
