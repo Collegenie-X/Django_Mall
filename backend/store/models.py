@@ -5,7 +5,6 @@ from django.db import models
 from accounts.models import User
 from django.utils import timezone
 from multiselectfield import MultiSelectField
-from .storage_backends import AttachmentS3Boto3Storage
 from django.core.files.storage import FileSystemStorage
 
 
@@ -154,10 +153,10 @@ class SectionType(models.Model):
         return f"{self.name}__({self.subject})"
 
 
-class PreviewImage(models.Model):
+class PreviewImage(models.Model):  ### 미리보기 []배열
     problem = models.ForeignKey(
         "Problem", on_delete=models.CASCADE, related_name="preview_images"
-    )
+    )  ### problem (1) : PreviewIamge  N
     image = models.ImageField(
         # upload_to=get_image_upload_path,
         upload_to="images/",
