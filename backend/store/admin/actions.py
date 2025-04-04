@@ -1,5 +1,5 @@
 from django.contrib import messages
-from store.models import PreviewImage
+from store.model import PreviewImage
 from django.conf import settings
 
 

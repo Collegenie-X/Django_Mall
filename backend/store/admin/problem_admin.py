@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 from django.db import models
 from django.forms import SelectMultiple
 from django.conf import settings
-from store.models import Problem, PreviewImage
+from store.model import Problem, PreviewImage
 from .inlines import PreviewImageInline
 
 
@@ -54,6 +54,7 @@ class ProblemAdmin(admin.ModelAdmin):
     list_display = [
         "id",
         "display_preview_images",
+        "is_free",
         "is_view",
         "problem_type",
         "subject",
@@ -61,7 +62,6 @@ class ProblemAdmin(admin.ModelAdmin):
         "discounted_price",
         "user",
         "title",
-        "is_free",
         "grade",
         "type",
         "display_units",
