@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
 from django.utils.safestring import mark_safe
-from store.models import SectionType
+from store.model import SectionType
 
 
 class SectionTypeAdmin(admin.ModelAdmin):

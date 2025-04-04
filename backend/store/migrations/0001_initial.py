@@ -2,7 +2,7 @@
 
 import django.db.models.deletion
 import multiselectfield.db.fields
-import store.models
+import store.model
 import store.storage_backends
 from django.conf import settings
 from django.db import migrations, models
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('is_view', models.BooleanField(db_index=True, default=True, help_text='비공개일때는 체크를 제거해 주세요.')),
                 ('pages', models.PositiveSmallIntegerField(help_text='* PDF (Pages number)')),
                 ('problems', models.PositiveSmallIntegerField(help_text='* PDF (Problem Numbers)')),
-                ('file', models.FileField(blank=True, default='', help_text='* required', null=True, storage=store.storage_backends.AttachmentS3Boto3Storage(), upload_to=store.models.get_file_upload_path)),
+                ('file', models.FileField(blank=True, default='', help_text='* required', null=True, storage=store.storage_backends.AttachmentS3Boto3Storage(), upload_to=store.model.get_file_upload_path)),
                 ('updated_date', models.DateTimeField(auto_now=True)),
                 ('created_date', models.DateTimeField(auto_now_add=True)),
                 ('user', models.ForeignKey(help_text='* required', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

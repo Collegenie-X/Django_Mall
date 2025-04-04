@@ -2,13 +2,13 @@ from django.forms import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from ..models import Problem, Wishlist, PreviewImage
+from ..model import Problem, Wishlist, PreviewImage
 from accounts.models import User
 from ..serializers import ProblemSerializer
 from django.shortcuts import get_object_or_404
 
 
-from store.models import Problem, UnitType, SectionType
+from store.model import Problem, UnitType, SectionType
 
 from django_filters import rest_framework as filters
 

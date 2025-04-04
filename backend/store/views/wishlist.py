@@ -5,7 +5,7 @@ from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from store.models import Problem, Wishlist
+from store.model import Problem, Wishlist
 from store.serializers import ProblemSerializer
 
 

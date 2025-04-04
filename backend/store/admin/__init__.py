@@ -3,7 +3,7 @@ from .section_admin import SectionTypeAdmin
 from .problem_admin import ProblemAdmin
 from .filters import RelatedProblemSubjectFilter
 
-from store.models import UnitType, SectionType, Problem
+from store.model import UnitType, SectionType, Problem
 
 from django.contrib import admin
 
