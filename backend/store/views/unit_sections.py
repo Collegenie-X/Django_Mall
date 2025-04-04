@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from django.db.models import Prefetch
-from store.models import Problem, UnitType, SectionType
+from store.model import Problem, UnitType, SectionType
 from store.serializers import UnitTypeSerializer, SectionTypeSerializer
 
 

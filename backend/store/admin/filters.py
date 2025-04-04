@@ -1,5 +1,5 @@
 from django.contrib.admin import SimpleListFilter
-from store.models import Problem
+from store.model import Problem
 
 
 class RelatedProblemSubjectFilter(SimpleListFilter):

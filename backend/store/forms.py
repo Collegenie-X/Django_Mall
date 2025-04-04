@@ -1,7 +1,7 @@
 # store/forms.py
 
 from django import forms
-from .models import Problem
+from .model import Problem
 
 class ProblemForm(forms.ModelForm):
     class Meta:
