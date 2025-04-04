@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 from django.db import models
 from django.forms import SelectMultiple
 from django.conf import settings
-from store.model import Problem, PreviewImage
+from store.models import Problem, PreviewImage
 from .inlines import PreviewImageInline
 
 

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .model import Problem, Wishlist, PreviewImage
+from .models import Problem, Wishlist, PreviewImage
 from django.contrib.auth import get_user_model
-from .model import UnitType, SectionType
+from .models import UnitType, SectionType
 import os
 from django.conf import settings
 

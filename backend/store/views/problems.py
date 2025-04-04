@@ -20,7 +20,7 @@ from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
 
 from store.serializers import ProblemSerializer
-from store.model import Problem
+from store.models import Problem
 from store.views.filters import ProblemFilter  # (※ Filter 클래스를 별도 파일로 빼도 됨)
 
 logger = logging.getLogger(__name__)

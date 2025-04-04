@@ -1,9 +1,8 @@
-
 from django.forms import ValidationError
 from django.shortcuts import get_object_or_404
 
 
-from store.model import Problem, UnitType, SectionType
+from store.models import Problem, UnitType, SectionType
 
 from django_filters import rest_framework as filters
 
@@ -13,7 +12,6 @@ from math import ceil
 from django.db.models import Count, Avg, Q, F, Value, IntegerField, Case, When, Sum
 from django.core.exceptions import ValidationError
 from django_filters import rest_framework as filters
-
 
 
 from functools import reduce
@@ -159,4 +157,3 @@ class ProblemFilter(filters.FilterSet):
             raise ValidationError(
                 "유효하지 않은 difficulty 값이 있습니다. 숫자 형태로 입력해 주세요."
             )
-

@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
 from django.utils.safestring import mark_safe
-from store.model import UnitType
+from store.models import UnitType
 
 
 class UnitTypeAdmin(admin.ModelAdmin):
