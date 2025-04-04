@@ -19,10 +19,9 @@ class PreviewImageSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         request = self.context.get("request")
-        if obj.image and hasattr(obj.image, "url"):
-            return (
-                request.build_absolute_uri(obj.image.url) if request else obj.image.url
-            )
+        if obj.image_url:
+            local_url = settings.MEDIA_URL + obj.image_url
+            return request.build_absolute_uri(local_url) if request else local_url
         return None
 
     def get_tag_image_url(self, obj):

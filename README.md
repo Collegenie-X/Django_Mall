@@ -110,3 +110,22 @@ const dummyData = [
 { email: "daniellemartin7890@gmail.com", username: "DazzlingDanielle" },
 { email: "edwardthompson1234@gmail.com", username: "EagerEdward" },
 ];
+
+
+
+python3 -m venv venv
+
+.\venv\Scripts\activate
+cd backend
+
+pip3 install -r requirements.txt
+
+python manage.py makemigrations 
+python manage.py migrate
+
+python manage.py runserver 
+
+cd frontend
+npm install 
+
+npm run dev
