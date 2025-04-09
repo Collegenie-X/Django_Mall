@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django_admin_logs",
     "store",
     "products",
+    "reviews",
 ]
 AUTH_USER_MODEL = "accounts.User"
 

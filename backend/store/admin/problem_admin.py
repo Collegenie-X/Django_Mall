@@ -85,7 +85,7 @@ class ProblemAdmin(admin.ModelAdmin):
         ),
         ("Files", {"fields": ("file",)}),
     )
-    search_fields = ["user__username", "title", "description"]
+    search_fields = ["id", "user__username", "title", "description"]
     list_filter = [
         "is_view",
         "grade",
