@@ -7,6 +7,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/accounts/", include("accounts.urls")),
     path("api/v1/store/", include("store.urls")),
+    path("api/v1/products/", include("products.urls")),
 ]
 
 # DEBUG 모드에서 정적/미디어 파일 서빙

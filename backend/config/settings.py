@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "rangefilter",
     "django_admin_logs",
     "store",
+    "products",
 ]
 AUTH_USER_MODEL = "accounts.User"
 
@@ -95,7 +96,7 @@ REST_FRAMEWORK = {
         "accounts.authentication.CustomJWTAuthentication",
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
 }
 
 ######## Email Setting (SES)  ##########
