@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.contrib import admin
-from store.model import PreviewImage
+from store.models import PreviewImage
 
 
 class PreviewImageInline(admin.TabularInline):

@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 from django.db import models
 from django.forms import SelectMultiple
 from django.conf import settings
-from store.model import Problem, PreviewImage
+from store.models import Problem, PreviewImage
 from .inlines import PreviewImageInline
 
 
@@ -85,7 +85,7 @@ class ProblemAdmin(admin.ModelAdmin):
         ),
         ("Files", {"fields": ("file",)}),
     )
-    search_fields = ["user__username", "title", "description"]
+    search_fields = ["id", "user__username", "title", "description"]
     list_filter = [
         "is_view",
         "grade",

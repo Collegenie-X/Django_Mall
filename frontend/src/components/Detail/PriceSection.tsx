@@ -129,10 +129,11 @@ const PriceSection: React.FC<PriceSectionProps> = ({
         return;
       }
 
-      if (!isPayment) {
-        setPaymentAgreeDialogOpen(true);
-        return;
-      }
+      // if (!isPayment ) {
+      //   // handleDownload(freeFileUrl, problemId);
+      //   handleDownload(fileUrl, problemId);
+      //   return;
+      // }
 
       if (fileUrl) {
         handleDownload(fileUrl, problemId);
