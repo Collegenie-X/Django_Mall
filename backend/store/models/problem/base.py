@@ -91,6 +91,22 @@ class Problem(models.Model):
         ProblemValidators.validate_price(self)
         ProblemValidators.validate_discounted_price(self)
 
+    def total_reviews_score(self):
+        """문제의 총 리뷰 점수를 반환합니다."""
+        from reviews.models import Review
+
+        reviews = Review.objects.filter(problem=self)
+        if not reviews.exists():
+            return 0
+        total_score = sum(review.rating for review in reviews)
+        return round(total_score / reviews.count(), 1)
+
+    def total_comments(self):
+        """문제의 총 댓글 수를 반환합니다."""
+        from reviews.models import Comment
+
+        return Comment.objects.filter(review__problem=self).count()
+
     class Meta:
         verbose_name = "Problem"
         verbose_name_plural = "Problems"
