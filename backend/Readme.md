@@ -2,6 +2,7 @@
 python -m venv venv
  .\venv\Scripts\activate
 
+cd backend
 pip install -r requirements.txt  
 
 python manage.py createsuperuser
@@ -16,11 +17,20 @@ pip install -r requirements.txt
 
 
 ###  생성 
-python manage.py generate_dummy_data
 
+
+### DB 생성
+python manage.py makemigrations store
+python manage.py migrate
+
+python manage.py generate_dummy_data
 
 #### 
 python manage.py createsuperuser
+
+admin@abc.com
+admin
+1234 
 
 
 
@@ -29,6 +39,9 @@ npm install
 
 npm fund  
 npm run dev 
+
+npm run build
+npm run start
 
 
 사용자 (10명):
