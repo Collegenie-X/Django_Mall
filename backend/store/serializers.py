@@ -142,6 +142,109 @@ class ProblemSerializer(serializers.ModelSerializer):
         return instance
 
 
+class ProblemSerializer(serializers.ModelSerializer):
+    write_user_name = serializers.SerializerMethodField()
+    file_name = serializers.SerializerMethodField()
+    file_url = serializers.SerializerMethodField()
+    is_wished = serializers.SerializerMethodField()
+    unit = serializers.SerializerMethodField()
+    detailed_section = serializers.SerializerMethodField()
+    is_purchased = serializers.SerializerMethodField()
+
+    total_score = serializers.SerializerMethodField()
+    total_comments = serializers.SerializerMethodField()
+    preview_images = PreviewImageSerializer(many=True, required=False)
+
+    class Meta:
+        model = Problem
+        fields = [
+            "id",
+            "total_score",
+            "total_comments",
+            "write_user_name",
+            "subject",
+            "problem_type",
+            "type",
+            "grade",
+            "unit",
+            "detailed_section",
+            "difficulty",
+            "title",
+            "description",
+            "discounted_price",
+            "price",
+            "pages",
+            "problems",
+            "preview_images",
+            "is_free",
+            "is_wished",
+            "is_purchased",
+            "file_name",
+            "file_url",
+            "updated_date",
+            "created_date",
+        ]
+        read_only_fields = ["user", "problem_type"]
+
+    def get_total_score(self, obj):
+        return obj.total_reviews_score()
+
+    def get_total_comments(self, obj):
+        return obj.total_comments()
+
+    def get_write_user_name(self, obj):
+        return obj.user.username
+
+    def get_file_name(self, obj):
+        if obj.file:
+            return os.path.basename(obj.file.name).split("___", 1)[-1]
+        return None
+
+    def get_file_url(self, obj):
+        if obj.is_free and obj.file:
+            request = self.context.get("request")
+            return request.build_absolute_uri(obj.file.url) if request else obj.file.url
+        return None
+
+    def get_is_wished(self, obj):
+        request = self.context.get("request")
+        if request and request.user.is_authenticated:
+            return Wishlist.objects.filter(user=request.user, problem=obj).exists()
+        return False
+
+    def get_unit(self, obj):
+        return [unit.name for unit in obj.unit.all()]
+
+    def get_detailed_section(self, obj):
+        return [section.name for section in obj.detailed_section.all()]
+
+    def get_is_purchased(self, obj):
+        request = self.context.get("request")
+        if request and request.user.is_authenticated:
+            return obj.payments.filter(creator=request.user).exists()
+        return False
+
+    def create(self, validated_data):
+        preview_images_data = validated_data.pop("preview_images", [])
+        problem = Problem.objects.create(**validated_data)
+        for image_data in preview_images_data:
+            PreviewImage.objects.create(problem=problem, **image_data)
+        return problem
+
+    def update(self, instance, validated_data):
+        preview_images_data = validated_data.pop("preview_images", None)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        if preview_images_data is not None:
+            instance.preview_images.all().delete()
+            for image_data in preview_images_data:
+                PreviewImage.objects.create(problem=instance, **image_data)
+
+        return instance
+
+
 class ProblemIsViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Problem

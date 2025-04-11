@@ -2,6 +2,7 @@ import random
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from store.models import Problem, UnitType, SectionType, PreviewImage
+from reviews.models import Review, Comment
 from faker import Faker
 from decimal import Decimal
 
@@ -89,6 +90,20 @@ class Command(BaseCommand):
     def create_preview_image(self, problem):
         PreviewImage.objects.create(problem=problem, image_url=fake.image_url())
 
+    def create_dummy_review(self, problem, user):
+        review = Review.objects.create(
+            user=user,
+            problem=problem,
+            rating=random.randint(1, 5),
+            comment=fake.text(max_nb_chars=200),
+        )
+        return review
+
+    def create_dummy_comment(self, review, user):
+        Comment.objects.create(
+            review=review, user=user, content=fake.text(max_nb_chars=100)
+        )
+
     def handle(self, *args, **options):
         self.stdout.write("Creating dummy data...")
 
@@ -100,12 +115,26 @@ class Command(BaseCommand):
         section_types = self.create_section_types()
 
         # Create problems with preview images
+        problems = []
         for _ in range(400):
             user = random.choice(users)
             problem = self.create_dummy_problem(user, unit_types, section_types)
+            problems.append(problem)
 
             # Create 1-3 preview images for each problem
             for _ in range(random.randint(1, 3)):
                 self.create_preview_image(problem)
+
+        # Create reviews and comments
+        for problem in problems:
+            # 각 문제당 1-5개의 리뷰 생성
+            for _ in range(random.randint(1, 5)):
+                review_user = random.choice(users)
+                review = self.create_dummy_review(problem, review_user)
+
+                # 각 리뷰당 0-3개의 댓글 생성
+                for _ in range(random.randint(0, 3)):
+                    comment_user = random.choice(users)
+                    self.create_dummy_comment(review, comment_user)
 
         self.stdout.write(self.style.SUCCESS("Successfully created dummy data"))
