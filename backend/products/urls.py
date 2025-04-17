@@ -4,7 +4,7 @@ from .views import ProductListCreateAPIView, ProductRetrieveUpdateDeleteAPIView
 urlpatterns = [
     path(
         "", ProductListCreateAPIView.as_view(), name="product-list-create"
-    ),  # 상품 목록 조회 및 생성
+    ),  # 상품 전체 목록 조회 및 상품 생성
     path(
         "<int:pk>/",
         ProductRetrieveUpdateDeleteAPIView.as_view(),

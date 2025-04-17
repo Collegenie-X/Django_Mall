@@ -4,7 +4,7 @@ from reviews.models import Review, Comment
 
 @admin.register(Review)
 class ReviewsAdmin(admin.ModelAdmin):
-    list_display = ["user", "problem", "rating", "comment", "created_at"]
+    list_display = ["id", "user", "problem", "rating", "comment", "created_at"]
     search_fields = [
         "user__email",
         "problem__title",
