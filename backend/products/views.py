@@ -13,6 +13,7 @@ class ProductListCreateAPIView(APIView):
     POST: 상품 생성
     """
 
+    ## 전체 목록 조회
     def get(self, request):
 
         self.permission_classes = [AllowAny]
@@ -22,6 +23,7 @@ class ProductListCreateAPIView(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    ## 상품 생성
     def post(self, request):
 
         self.permission_classes = [IsAuthenticated]
@@ -30,7 +32,10 @@ class ProductListCreateAPIView(APIView):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(
+                data={"result": "성공적으로 생성되었습니다."},
+                status=201,
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -51,13 +56,13 @@ class ProductRetrieveUpdateDeleteAPIView(APIView):
             return None
 
     def get(self, request, pk):
-        product = self.get_object(pk)
+        product = self.get_object(pk)  ### pk 검색에 따른 Product-DB 하나 선택
         if product is None:
             return Response({"detail": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = ProductSerializer(product)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request, pk):
+    def put(self, request, pk):  ### 전체 수정 
         product = self.get_object(pk)
         if product is None:
             return Response({"detail": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
@@ -67,7 +72,7 @@ class ProductRetrieveUpdateDeleteAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def patch(self, request, pk):
+    def patch(self, request, pk):  ### 부분 수정 
         product = self.get_object(pk)
         if product is None:
             return Response({"detail": "Not Found"}, status=status.HTTP_404_NOT_FOUND)

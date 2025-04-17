@@ -1,11 +1,14 @@
 
 python -m venv venv
  .\venv\Scripts\activate
-
-cd backend
 pip install -r requirements.txt  
 
-python manage.py createsuperuser
+### exec 실행 범위 allow
+Set-ExecutionPolicy Unrestricted -Scope Process
+
+cd backend
+python manage.py runserver
+createsuperuser
 
 Email: admin@abc.com   
 Username: admin
@@ -40,6 +43,7 @@ npm install
 npm fund  
 npm run dev 
 
+cd frontend
 npm run build
 npm run start
 
