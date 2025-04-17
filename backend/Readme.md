@@ -2,10 +2,15 @@
 python -m venv venv
  .\venv\Scripts\activate
 
-cd backend
-pip install -r requirements.txt  
+### cd backend
+### pip install -r requirements.txt  
 
-python manage.py createsuperuser
+cd backend 
+python manage.py runserver
+createsuperuser
+
+
+### python manage.py createsuperuser
 
 Email: admin@abc.com   
 Username: admin
@@ -13,6 +18,7 @@ Password:
 
 python -m venv venv 
 .\venv\Scripts\activate
+
 pip install -r requirements.txt  
 
 
@@ -20,10 +26,13 @@ pip install -r requirements.txt
 
 
 ### DB 생성
-python manage.py makemigrations store reviews
-python manage.py migrate
+### python manage.py makemigrations store reviews
+### python manage.py migrate
+### python manage.py generate_dummy_data
 
-python manage.py generate_dummy_data
+  
+
+
 
 #### 
 python manage.py createsuperuser
