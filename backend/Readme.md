@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 
 ### DB 생성
-python manage.py makemigrations store
+python manage.py makemigrations store reviews
 python manage.py migrate
 
 python manage.py generate_dummy_data
@@ -35,6 +35,7 @@ admin@abc.com
 admin
 1234 
 
+Set-ExecutionPolicy Unrestricted -Scope Process
 
 
 python .\manage.py runserver 
