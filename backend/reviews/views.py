@@ -168,7 +168,7 @@ class ReviewListCreateAPIView(APIView):
                 {"all_reviews": reviews_serializer.data}, status=status.HTTP_201_CREATED
             )
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=500)
 
 
 class ReviewDetailAPIView(APIView):
@@ -180,15 +180,15 @@ class ReviewDetailAPIView(APIView):
         except Review.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk):
+    def get(self, request, pk):  ##개별 조회 
         review = self.get_object(pk)
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
 
-    def put(self, request, pk):
+    def put(self, request, pk):  ## 부분 수정
         review = self.get_object(pk)
 
-        if review.user != request.user:
+        if review.user != request.user:  ## 작성자 
             return Response(
                 {"detail": "You do not have permission to edit this review."},
                 status=status.HTTP_403_FORBIDDEN,
@@ -219,16 +219,16 @@ class ReviewDetailAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        review = self.get_object(pk)
+        review_db = self.get_object(pk)
 
-        if review.user != request.user:
+        if review_db.user != request.user:  ## 작성자
             return Response(
                 {"detail": "You do not have permission to delete this review."},
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        problem_id = review.problem.id
-        review.delete()
+        problem_id = review_db.problem.id
+        review_db.delete()
 
         remaining_reviews = Review.objects.filter(problem_id=problem_id)
         serializer = ReviewSerializer(remaining_reviews, many=True)

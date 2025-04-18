@@ -7,9 +7,13 @@ from .meta import ReviewMeta
 
 class Review(models.Model):
     # 관계 필드
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
+    user = models.ForeignKey(User, 
+                             on_delete=models.CASCADE, 
+                             related_name="reviews")
     problem = models.ForeignKey(
-        Problem, on_delete=models.CASCADE, related_name="reviews"
+                        Problem, 
+                        on_delete=models.CASCADE, 
+                        related_name="reviews"
     )
 
     # 리뷰 내용 필드
