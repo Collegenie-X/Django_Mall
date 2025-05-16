@@ -1,6 +1,7 @@
 
 python -m venv venv
  .\venv\Scripts\activate
+
 pip install -r requirements.txt  
 
 ### exec 실행 범위 allow
@@ -9,6 +10,7 @@ Set-ExecutionPolicy Unrestricted -Scope Process
 cd backend
 python manage.py runserver
 createsuperuser
+
 
 Email: admin@abc.com   
 Username: admin
@@ -27,10 +29,13 @@ pip install -r requirements.txt
 
 
 ### DB 생성
-python manage.py makemigrations store reviews
-python manage.py migrate
+### python manage.py makemigrations store reviews
+### python manage.py migrate
+### python manage.py generate_dummy_data
 
-python manage.py generate_dummy_data
+  
+
+
 
 #### 
 python manage.py createsuperuser
